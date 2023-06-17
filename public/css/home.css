@@ -1,0 +1,222 @@
+/* navbar---------------------  */
+.navbar {
+    padding-top: 0px;
+
+}
+
+.navbar-position {
+    background-color: azure;
+    position: fixed;
+    width: 10%;
+    height: 11%;
+    margin-top: 3%;
+    z-index: 4;
+    color: #666;
+    font-size: 14px;
+}
+
+.search-box {
+    margin-top: 10px;
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.search-input {
+    border: 0;
+    margin-right: 10px;
+    outline: none;
+}
+
+.search-icon {
+    margin-right: 8px;
+    font-size: 17px;
+    color: #666;
+    align-items: center;
+}
+
+
+/* sub header -----------------*/
+
+.subheader-position {
+    background-color: white;
+    position: fixed;
+    width: 10%;
+    margin-top: 3%;
+    z-index: 3;
+    color: #666;
+    font-size: 14px;
+}
+
+.subheader-ul {
+    margin-top: 10px;
+    padding-top: 10px;
+    align-items: flex-end;
+}
+
+.scrollspy-example {
+    height: 100vh;
+    margin-top: 0.5rem;
+
+}
+
+.subheader-a-tag {
+    color: #666;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 0px 10px;
+}
+
+.subheader-a-tag:hover {
+    color: #333;
+}
+
+/* body ---------------- */
+.body {
+    margin-top: 6%;
+
+}
+
+.lopoto-father {
+    position: relative;
+}
+
+.lopoto-child {
+    position: absolute;
+    width: 16%;
+    top: 12px;
+    right: 50px;
+    border-radius: 20px;
+}
+
+.carousel-img {
+    width: 21%;
+    margin: 10px;
+    box-shadow: 1px 2px 5px #999;
+    border-radius: 10px;
+}
+
+.carousel-father {
+    position: relative;
+
+}
+
+.crousel-discription {
+    font-weight: bolder;
+    color: rgb(217, 255, 82);
+
+}
+
+
+.categories-card {
+    width: 12rem;
+}
+
+
+/*magazine ------------------- */
+
+.magazine a {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(241, 240, 240);
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #666;
+}
+
+.magazine a .right {
+    display: flex;
+    align-items: center;
+}
+
+.magazine a .left {
+    display: flex;
+    align-items: center;
+}
+
+.salestableandnews {
+    display: flex;
+    background-color: rgb(241, 240, 240);
+    border-radius: 20px;
+    margin-bottom: 5%;
+}
+
+.salestable-img {
+    width: 30%;
+    padding: 8px;
+    border-radius: 20px;
+}
+
+
+/* news ---------------------- */
+
+.news-img {
+    width: 90px;
+    height: 90px;
+    padding: 8px;
+    border-radius: 20px;
+}
+
+.news-container {
+    display: inline-flex;
+}
+
+.news-container .left {
+    display: flex;
+    justify-content: space-between;
+}
+
+.news-a-tag {
+    text-decoration: none;
+    color: #666;
+}
+
+.news-a-tag:hover {
+    color: #333;
+    background-color: rgb(224, 220, 220);
+    border-radius: 15px;
+}
+
+/* footer ---------------------- */
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #343542;
+    padding: 3px;
+}
+
+.footer-a-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    padding-top: 5px;
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 11px;
+}
+
+.footer-a-tag:hover {
+    background-color: rgb(167, 133, 133);
+    color:black;
+    border-radius: 50px;
+}
+
+.footer-icon {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 15px;
+}
+
+.footer-icon:hover {
+    background-color: rgb(167, 133, 133);
+    color: #111;
+    border-radius: 50px;
+}

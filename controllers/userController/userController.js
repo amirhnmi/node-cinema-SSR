@@ -18,7 +18,7 @@ class UserController extends Controller{
         try {
             const user =await  User.findOne({_id: req.params.id})
             if(!user){
-                this.error("چنین کاربری یافت نشد", 404)
+                throw new Error("چنین کاربری یافت نشد")
             }
             res.render("users/user.ejs", {user: user})
         } catch (err) {

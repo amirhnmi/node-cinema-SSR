@@ -12,10 +12,7 @@ mongoose.connect(process.env.DB_ADDRESS)
 .then(()=> console.log("connected to mongoDB"))
 .catch(()=> console.log("could not connect to mongoDB"))
 
-app.get("/", (req,res)=>{
-    res.render("home.ejs")
-})
 
-app.use("/", require("./routes/index.js"))
+app.use("", require("./routes/route.js"))
 
 app.listen(process.env.PORT,()=>console.log(`connected to server on port ${process.env.PORT}`))

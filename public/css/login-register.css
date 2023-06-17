@@ -1,0 +1,39 @@
+.login-register-body{
+    margin: 0px;
+    background-color: rgb(241, 239, 236);
+}
+.containerr{
+    max-width: 800px;
+    min-height: 100vh;
+    margin: 0px auto;
+    background-color: rgb(241, 239, 236);
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+.sinematicket-img{
+    text-align: center;
+}
+
+.login-box{
+    height: 86vh;
+    background-color: white;
+    border-radius: 50px;
+    padding: 50px;
+    position: relative;
+}
+
+.login-svg{
+    background: none;
+    position: absolute;
+    right: 400px;
+    bottom: 5px;
+    
+}
+
+.comeback-to-home{
+    position: absolute;
+    bottom: 40px;
+}
+
+
