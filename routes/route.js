@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 
-
+// start home router
 const Screening = require("../models/categories/categorie/screening")
 const Theater = require("../models/categories/categorie/theater")
 const ArtAndExprience = require("../models/categories/categorie/artAndExprience")
@@ -33,10 +33,14 @@ router.get("/",  async (req,res,next)=>{
     }
     )
 })
+// end of home router
 
 
+// global router
 router.use("/user", require("./users/user"))
 router.use("/categories", require("./categories/categories.js"))
+router.use("/news", require("./salestable&news/salestable&news"))
+router.use("/salestable", require("./salestable&news/salestable&news"))
 
 router.all("*", async(req,res,next)=>{
     try {
