@@ -1,0 +1,72 @@
+<html dir="rtl" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login-register.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>ثبت نام | ورود</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <body class="login-register-body">
+            <div class="containerr">
+                <section class="login-box">
+                    <div class="sinematicket-img mb-4">
+                        <img src="https://cinematicket.org/v3.13.8/assets/images/typo_logo.svg" alt="" />
+                    </div>
+                    <div class="login">
+                        <div class="d-flex">
+                            <div class="">
+                                <% if(errors.length){ %>
+                                    <div>
+                                        <ul class="alert alert-danger">
+                                           <% errors.forEach(err=>{ %>
+                                                <li ><%= err.msg %></li>
+                                           <% }) %>
+                                        </ul>
+                                    </div>
+                                <% } %>
+
+                                <span class="fw-bold ">اگر در سینماتیکت حساب کاربری دارید، وارد شوید.</span>
+                                <form action="/auth/login" class="mt-3" method="post">
+                                    <div class="mb-3">
+                                        <label htmlFor="exampleInputEmail1" class="form-label">آدرس ایمیل :</label>
+                                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" />
+                                    </div>
+                                    <% if(message){ %>
+                                        <p class="text-danger"><%= message %></p>
+                                    <% } %>
+                                    <div class="mb-3">
+                                        <label htmlFor="exampleInputPassword1" class="form-lable">کلمه عبور :</label>
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" />
+                                    </div>
+                                    <button type="submit" class="btn btn-danger"><span class="mx-5">ورود</span></button>
+                                    <a href="/password_reset">بازیابی کلمه عبور</a>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 register-form">
+                            <div class="right">
+                                <span class="fw-bold">اگر در سینماتیکت حساب کاربری ندارید، ثبت نام کنید.</span>
+                            </div>
+                            <div class="mt-2">
+                                <a href="/auth/register" ><button type="submit" class="btn btn-danger">ایجاد حساب کاربری</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="login-svg">
+                        <img src="/images/login&register/login.svg" alt="" />
+                    </div>
+
+                    <div class="comeback-to-home">
+                        <a href="/"><button type="submit" class="btn btn-danger">بازگشت به صفحه اصلی</button></a>
+                        
+                    </div>
+                </section>
+            </div>
+        </body>
+    </div>
+</body>
+</html>

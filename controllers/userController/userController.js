@@ -18,7 +18,7 @@ class UserController extends Controller{
         try {
             const user =await  User.findOne({_id: req.params.id})
             if(!user){
-                throw new Error("چنین کاربری یافت نشد")
+                this.error("چنین کاربری یافت نشد", 404)
             }
             res.render("users/user.ejs", {user: user})
         } catch (err) {
@@ -30,7 +30,8 @@ class UserController extends Controller{
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                throw new Error("validation eeror")
+                req.flash("errors", errors.array())
+                return res.redirect("/user");
             }
         
             req.body.id = parseInt(req.body.id);
@@ -41,6 +42,7 @@ class UserController extends Controller{
                 password: req.body.password
             })
             await newUser.save()
+            req.flash("message", "کاربر مورد نظر با موفقیت اضافه شد")
             return res.redirect("/user");
         } catch (err) {
             next(err)
@@ -51,7 +53,8 @@ class UserController extends Controller{
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                throw new Error("validation eeror")
+                req.flash("errors", errors.array())
+            return res.redirect("/user");
             }
         
             await User.findByIdAndUpdate(req.params.id, {
@@ -60,6 +63,7 @@ class UserController extends Controller{
                 phone_number: req.body.phone_number,
                 password: req.body.password
             })
+            req.flash("message", "کاربر مورد نظر با موفقیت به روزرسانی شد")
             res.redirect("/user")
         } catch (err) {
             next(err)
@@ -69,6 +73,8 @@ class UserController extends Controller{
     async deleteUser(req,res,next){
         try{
             await User.findByIdAndRemove(req.params.id)
+            req.flash("message", "کاربر مورد نظر با موفقیت حذف شد")
+            return res.redirect("/user")
         } catch(err) {
             next(err)
         } 

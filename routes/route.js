@@ -12,35 +12,46 @@ const News = require("../models/salestable & news/news")
 const SalesTable = require("../models/salestable & news/salestable")
 
 router.get("/",  async (req,res,next)=>{
-    const screening_movies = await Screening.find({})
-    const theater_movies = await Theater.find({})
-    const artandexprience_movies = await ArtAndExprience.find({})
-    const comedytheater_movies = await ComedyTheater.find({})
-    const childrenstheater_movies = await ChildrensTheater.find({})
+    try {
+        const screening_movies = await Screening.find({})
+        const theater_movies = await Theater.find({})
+        const artandexprience_movies = await ArtAndExprience.find({})
+        const comedytheater_movies = await ComedyTheater.find({})
+        const childrenstheater_movies = await ChildrensTheater.find({})
 
-    const news = await News.find({})
-    const salestables = await SalesTable.find({})
-    res.render("home.ejs",
-    {
-        screenings:screening_movies,
-        theaters:theater_movies,
-        artandexpriences:artandexprience_movies,
-        comedytheaters:comedytheater_movies,
-        childrenstheaters:childrenstheater_movies,
+        const news = await News.find({})
+        const salestables = await SalesTable.find({})
+        res.render("home.ejs",
+        {
+            screenings:screening_movies,
+            theaters:theater_movies,
+            artandexpriences:artandexprience_movies,
+            comedytheaters:comedytheater_movies,
+            childrenstheaters:childrenstheater_movies,
 
-        news:news,
-        salestables:salestables,
+            news:news,
+            salestables:salestables,
+        }
+        )
+    } catch (err) {
+        next(err)
     }
-    )
 })
 // end of home router
 
 
 // global router
 router.use("/user", require("./users/user"))
+router.use("/auth", require("./authentication/auth"))
+router.use("/dashboard", require("./dashboard/userDashboard.js"))
 router.use("/categories", require("./categories/categories.js"))
 router.use("/news", require("./salestable&news/salestable&news"))
 router.use("/salestable", require("./salestable&news/salestable&news"))
+router.get("/logout", (req,res)=>{
+    req.logOut(function(err) {
+        if (err) { return next(err); }});
+    res.redirect("/")
+})
 
 router.all("*", async(req,res,next)=>{
     try {
@@ -49,6 +60,19 @@ router.all("*", async(req,res,next)=>{
         throw err;
     } catch (err) {
         next(err)
+    }
+})
+
+// all error manager
+router.use((err,req,res,next)=>{
+    const code= err.status || 500;
+    const message= err.message || "";
+    const stack= err.stack || "";
+
+    if(process.env.DEBUG){
+        return res.render("errors/developer.ejs", {message, stack})
+    }else{
+        return res.render(`errors/${code}`, {message:message})
     }
 })
 
