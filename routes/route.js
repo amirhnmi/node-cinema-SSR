@@ -44,6 +44,7 @@ router.get("/",  async (req,res,next)=>{
 router.use("/user", require("./users/user"))
 router.use("/auth", require("./authentication/auth"))
 router.use("/dashboard", require("./dashboard/userDashboard.js"))
+router.use("/admin", require("./dashboard/adminDashboard"))
 router.use("/categories", require("./categories/categories.js"))
 router.use("/news", require("./salestable&news/salestable&news"))
 router.use("/salestable", require("./salestable&news/salestable&news"))

@@ -6,6 +6,22 @@
 </head>
 <body>
     <h1>user dashboard</h1>
+    <h2>hi <%= req.user.username %> </h2>
+    <% if(errors.length){ %>
+        <div>
+            <ul class="alert alert-danger">
+               <% errors.forEach(err=>{ %>
+                    <li ><%= err.msg %></li>
+               <% }) %>
+            </ul>
+        </div>
+    <% } %>
+    <img src="<%= req.user.avatar %>" style="width: 100px; border-radius: 50%;" alt="">
+    <form action="/dashboard/edituser" method="post" enctype="multipart/form-data">
+        <input type="text" placeholder="user name" name="username" value="<%= req.user.username %>">
+        <input type="file" name="avatar">
+        <input type="submit" value="send">
+    </form>
     <a href="/logout">logout</a>
 </body>
 </html>
