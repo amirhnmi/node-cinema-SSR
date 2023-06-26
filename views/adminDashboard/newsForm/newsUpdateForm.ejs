@@ -1,0 +1,52 @@
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <form action="/admin/news/update/<%= news.id %>?method=PUT" method="post" enctype="multipart/form-data">
+            <div class="row g-2 was-validated">
+                <div class="col-md-4">
+                    <label  class="form-label">عنوان:</label>
+                    <input name="title" value="<%= news.title %>" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">پدید آورنده:</label>
+                    <input name="author" value="<%= news.author %>" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">توضیحات:</label>
+                    <input name="description" value="<%= news.description %>" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">تاریخ خبر:</label>
+                    <input name="news_date" value="<%= news.news_date %>" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">تاریخ انتشار:</label>
+                    <input name="publish_date" value="<%= news.publish_date %>" type="text" class="form-control is-valid" required />
+    
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">متن خبر:</label>
+                    <textarea name="news_text" value="<%= news.news_text %>" class="form-control is-invalid" placeholder="خلاصه ایی از فیلم را ذکر کنید ..." required></textarea>
+                </div>
+    
+                <div class="col-md-4">
+                    <label class="form-label">عکس خبر:</label>
+                    <input name="image" value="<%= news.image %>"  type="file" class="form-control" required />
+                </div>
+    
+                <div class="mb-3">
+                    <input class="btn btn-primary ms-2" type="submit" value="ایجاد خبر" > 
+                    <a href="/admin" class="btn btn-danger" type="submit" >بازگشت به داشبورد</a>
+                </div>
+            </div>
+        </form>
+        </form>
+    </div>
+</body>
+</html>

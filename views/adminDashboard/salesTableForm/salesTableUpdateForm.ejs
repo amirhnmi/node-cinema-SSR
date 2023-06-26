@@ -1,0 +1,42 @@
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <form action="/admin/salestable/update/<%= salestable.id %>?method=PUT" method="post" enctype="multipart/form-data">
+            <div class="row g-2 was-validated">
+                <div class="col-md-4">
+                    <label  class="form-label">نام فیلم:</label>
+                    <input type="text" name="movie_name" value="<%= salestable.movie_name %>" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">کارگردان:</label>
+                    <input type="text" name="director" value="<%= salestable.director %>" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">تهیه کننده:</label>
+                    <input type="text" name="price" value="<%= salestable.price %>" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">تاریخ تولید:</label>
+                    <input type="text" name="last_update" value="<%= salestable.last_update %>" class="form-control is-valid" required >
+                </div>
+    
+                <div class="col-md-4">
+                    <label class="form-label">عکس پوستر:</label>
+                    <input name="image" type="file" value="<%= salestable.image %>"  class="form-control" required >
+                </div>
+    
+                <div class="mb-3">
+                    <input class="btn btn-primary ms-2" type="submit" value="آپدیت جدول فروش" > 
+                    <a href="/admin" class="btn btn-danger">بازگشت به داشبورد</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

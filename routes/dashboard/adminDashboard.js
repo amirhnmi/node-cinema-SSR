@@ -10,6 +10,10 @@ const ArtAndExprienceController = require("../../controllers/categoryController/
 const ComedyTheaterController = require("../../controllers/categoryController/comedyTheaterController")
 const ChildrensTheaterController = require("../../controllers/categoryController/childrensTheaterController")
 
+// salestable and news
+const SalesTableController = require("../../controllers/salestable&newsController/salesTableController")
+const NewsController = require("../../controllers/salestable&newsController/newsController")
+
 // image validator
 const CategoryImageValidator = require("../../validators/categoryImageValidator")
 
@@ -19,6 +23,8 @@ const TheaterUploadImage = require("../../upload/theaterUploadImage")
 const ComedyTheaterUploadImage = require("../../upload/comedyTheaterUploadImage")
 const ChildrensTheaterUploadImage = require("../../upload/childrensTheaterUploadImage")
 const ArtAndExprienceUploadImage = require("../../upload/artAndExprienceUploadImage ")
+const SalesTableUploadImage = require("../../upload/salesTableUploadImage")
+const NewsUploadImage = require("../../upload/newsUploadImage")
 
 router.use((req,res,next)=>{
     if(req.isAuthenticated()){
@@ -123,5 +129,41 @@ router.put("/childrenstheater/update/:id" , ChildrensTheaterUploadImage.single("
     next();},CategoryImageValidator.validate(),ChildrensTheaterController.updateChildrensTheater)
 router.delete("/childrenstheater/delete/:id", ChildrensTheaterController.deleteChildrensTheater)
 
+// sales table-----------
+router.get("/salestable/", SalesTableController.getSalesTable)
+router.get("/salestable/:id", SalesTableController.getOneSalesTable)
+router.post("/salestable/create" , SalesTableUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),SalesTableController.createSalesTable)
+router.put("/salestable/update/:id" , SalesTableUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),SalesTableController.updateSalesTable)
+router.delete("/salestable/delete/:id", SalesTableController.deleteSalesTable)
 
+// news-----------
+router.get("/news/", NewsController.getNews)
+router.get("/news/:id", NewsController.getOneNews)
+router.post("/news/create" , NewsUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),NewsController.createNews)
+router.put("/news/update/:id" , NewsUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),NewsController.updateNews)
+router.delete("/news/delete/:id", NewsController.deleteNews)
 module.exports = router

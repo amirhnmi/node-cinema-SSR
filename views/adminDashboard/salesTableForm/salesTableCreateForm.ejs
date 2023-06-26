@@ -1,0 +1,90 @@
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <span class="fw-bold fs-5">جدول فروش</span>
+        <hr />
+        <% if(errors.length){ %>
+            <div>
+                <ul>
+                   <% errors.forEach(err=>{ %>
+                        <li class="alert alert-danger" ><%= err.msg %></li>
+                   <% }) %>
+                </ul>
+            </div>
+        <% } %>
+        
+        <% if(message){ %>
+            <h4><%= message %></h4>
+        <% } %>
+        <form action="/admin/salestable/create" method="post" enctype="multipart/form-data">
+            <div class="row g-2 was-validated">
+                <div class="col-md-4">
+                    <label  class="form-label">نام فیلم:</label>
+                    <input type="text" name="movie_name" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">کارگردان:</label>
+                    <input type="text" name="director" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">قیمت فروش :</label>
+                    <input type="text" name="price" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">آخرین بروزرسانی :</label>
+                    <input type="text" name="last_update" class="form-control is-valid" required >
+                </div>
+    
+                <div class="col-md-4">
+                    <label class="form-label">عکس پوستر:</label>
+                    <input name="image" type="file" class="form-control" required >
+                </div>
+    
+                <div class="mb-3">
+                    <input class="btn btn-primary ms-2" type="submit" value="ایجاد جدول فروش" > 
+                    <a href="/admin" class="btn btn-danger">بازگشت به داشبورد</a>
+                </div>
+            </div>
+        </form>
+         
+        <table class="table fs-sm">
+            <thead>
+                <tr>
+                    <th scope="col">آي دی</th>
+                    <th scope="col">نام فیلم</th>
+                    <th scope="col">گارگردان</th>
+                    <th scope="col">مبلغ فروش</th>
+                    <th scope="col">اخرین به روزرسانی</th>
+                    <th scope="col">حذف | آپدیت</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% salestables.forEach((salestable)=>{ %>
+                    <tr>
+                        <td><%= salestable._id %></td>
+                        <td><%= salestable.movie_name %></td>
+                        <td><%= salestable.director %></td>
+                        <td><%= salestable.price %></td>
+                        <td><%= salestable.last_update %></td>
+                        <td class="d-flex">
+                            <form action="/admin/salestable/delete/<%= salestable._id %>?method=DELETE" method="post">
+                                <input type="submit" class="btn btn-danger ms-2" value="حذف">
+                            </form>
+                            <a href="/admin/salestable/<%= salestable._id %>"><button class="btn btn-primary" type="submit">آپدیت</button></a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>   
+        </table>
+    </div>
+
+   
+    <script src="/js/bootstrap.bundle.min.js" ></script>
+</body>
+</html>

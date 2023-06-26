@@ -5,28 +5,28 @@ const mongoose = require("mongoose");
 const SalesTable = require("../../models/salestable & news/salestable");
 
 class SalesTableController extends Controller{
-    async getSalesTable(req,res){
+    async getSalesTable(req,res,next){
         try {
             const SalesTable_movies = await SalesTable.find({})
-            res.render("home.ejs", {salestable:SalesTable_movies})
+            res.render("adminDashboard/salesTableForm/salesTableCreateForm.ejs", {salestables:SalesTable_movies})
         } catch (err) {
             next(err)
         }
         
     }
 
-    async getOneSalesTable(req,res){
+    async getOneSalesTable(req,res,next){
         try {
             if(!mongoose.Types.ObjectId.isValid(req.params.id)){
-                throw new Error("آیدی نامعتبر است")
+                req.flash("errors","آیدی نامعتبر است")
             }
             const SalesTable_movie = await SalesTable.findById(req.params.id)
     
             if(!SalesTable_movie){
-                throw new Error("خبری با این آی دی یافت نشد")
+                req.flash("errors","فیلمی با این آی دی یافت نشد")
             }
     
-            res.render("home.ejs", {salestable:SalesTable_movie})
+            res.render("adminDashboard/salesTableForm/salesTableUpdateForm.ejs", {salestable:SalesTable_movie})
         } catch (err) {
             next(err)
         }
@@ -34,66 +34,73 @@ class SalesTableController extends Controller{
 
     }
 
-    async createSalesTable(req,res){
+    async createSalesTable(req,res,next){
         try {
-            const { movie_name,image, director, last_update, price} = req.body;        
-            let newsalestable= await this.SalesTable({
+            const { movie_name,image, director, last_update, price} = req.body;            
+            let newsalestable= await new SalesTable({
                 movie_name,
                 image,
                 director,
                 price,
                 last_update,
             })
-
-        newsalestable = await newsalestable.save()
-
+            if(req.file){
+                newsalestable.image = req.file.path.replace(/\\/g,"/").substring(6)
+               }
+               newsalestable = await newsalestable.save()
+            req.flash("message", "اطلاعات فیلم مورد نظر با موفقیت اضافه شد")
+            return res.redirect("/admin/salestable");
         } catch (err) {
             next(err)
         }
     }
 
-    async updateSalesTable(req,res){
+    async updateSalesTable(req,res,next){
         try {
             if(!mongoose.Types.ObjectId.isValid(req.params.id)){
-                throw new Error("آیدی نامعتبر است")
+                req.flash("errors","آیدی نامعتبر است")
             }
+                
             const { movie_name,image, director, last_update, price} = req.body
-            const salestable=await this.SalesTable.findByIdAndUpdate(req.params.id, {
+            let data = {
                 movie_name,
                 director,
                 image,
                 price,
                 last_update,
-            },{new: true});
-    
-            if(!SalesTable_movie){
-                throw new Error("خبری با این آی دی یافت نشد")
             }
+            if(req.file){
+                data.image = req.file.path.replace(/\\/g,"/").substring(6)
+               }
+               const salestable=await SalesTable.findByIdAndUpdate(req.params.id, {$set : data},{new: true});
+            
+               if(!salestable){
+                req.flash("errors","فیلمی با این آی دی یافت نشد")
+            }
+            req.flash("message", "اطلاعات فیلم مورد نظر با موفقیت به روزرسانی شد")
+            res.redirect("/admin/salestable")
 
         } catch (err) {
             next(err)
         }
-        
-
     }
 
-    async deleteSalesTable(req,res){
+    async deleteSalesTable(req,res,next){
         try {
             if(!mongoose.Types.ObjectId.isValid(req.params.id)){
-                throw new Error("آیدی نامعتبر است")
+                req.flash("errors","آیدی نامعتبر است")
             }
     
-            const SalesTable_movie = await SalesTable.findByIdAndRemove(req.params.id)
-    
+            const SalesTable_movie = await SalesTable.findByIdAndRemove(req.params.id)    
             if(!SalesTable_movie){
-                throw new Error("خبری با این آی دی یافت نشد")
+                req.flash("errors","فیلمی با این آی دی یافت نشد")
             }
+            req.flash("message", "اطلاعات فیلم مورد نظر با موفقیت به حدف شد")
+            res.redirect("/admin/salestable")
 
         } catch (err) {
             next(err)
         }
-        
-
     }
 }
 

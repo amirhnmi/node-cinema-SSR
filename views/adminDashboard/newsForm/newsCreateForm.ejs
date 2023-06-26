@@ -1,0 +1,103 @@
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <span class="fw-bold fs-5">خبر </span>
+        <hr />
+        <% if(errors.length){ %>
+            <div>
+                <ul>
+                   <% errors.forEach(err=>{ %>
+                        <li class="alert alert-danger" ><%= err.msg %></li>
+                   <% }) %>
+                </ul>
+            </div>
+        <% } %>
+        
+        <% if(message){ %>
+            <h4><%= message %></h4>
+        <% } %>
+        <form action="/admin/news/create" method="post" enctype="multipart/form-data">
+            <div class="row g-2 was-validated">
+                <div class="col-md-4">
+                    <label  class="form-label">عنوان:</label>
+                    <input name="title" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">پدید آورنده:</label>
+                    <input name="author" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">توضیحات:</label>
+                    <input name="description" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">تاریخ خبر:</label>
+                    <input name="news_date" type="text" class="form-control is-valid" required />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">تاریخ انتشار:</label>
+                    <input name="publish_date" type="text" class="form-control is-valid" required />
+    
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">متن خبر:</label>
+                    <textarea name="news_text" class="form-control is-invalid" placeholder="خلاصه ایی از فیلم را ذکر کنید ..." required></textarea>
+                </div>
+    
+                <div class="col-md-4">
+                    <label class="form-label">عکس خبر:</label>
+                    <input name="image" type="file" class="form-control" required />
+                </div>
+    
+                <div class="mb-3">
+                    <input class="btn btn-primary ms-2" type="submit" value="ایجاد خبر" > 
+                    <a href="/admin" class="btn btn-danger" type="submit" >بازگشت به داشبورد</a>
+                </div>
+            </div>
+        </form>
+         
+        <table class="table fs-sm">
+            <thead>
+                <tr>
+                    <th scope="col">آي دی</th>
+                    <th scope="col">عنوان</th>
+                    <th scope="col">توضیحات</th>
+                    <th scope="col">متن خبر</th>
+                    <th scope="col">پدید آورنده</th>
+                    <th scope="col">تاریخ خبر</th>
+                    <th scope="col">تاریخ انتشار</th>
+                    <th scope="col">حذف | آپدیت</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% news.forEach((new1)=>{ %>
+                    <tr>
+                        <td><%= new1._id %></td>
+                        <td><%= new1.title %></td>
+                        <td><%= new1.description %></td>
+                        <td><%= new1.news_text %></td>
+                        <td><%= new1.author %></td>
+                        <td><%= new1.news_date %></td>
+                        <td><%= new1.publish_date %></td>
+                        <td class="d-flex">
+                            <form action="/admin/news/delete/<%= new1._id %>?method=DELETE" method="post">
+                                <input type="submit" class="btn btn-danger ms-2" value="حذف">
+                            </form>
+                            <a href="/admin/news/<%= new1._id %>"><button class="btn btn-primary" type="submit">آپدیت</button></a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>   
+        </table>
+    </div>
+
+   
+    <script src="/js/bootstrap.bundle.min.js" ></script>
+</body>
+</html>
