@@ -8,7 +8,7 @@ class TheaterController extends Controller{
     async getTheater(req,res){
         try {
             const theater_movies = await Theater.find({})
-            res.render("home.ejs", {theaters:theater_movies})
+            res.render("adminDashboard/theaterForm.ejs", {theaters:theater_movies})
         } catch (err) {
             next(err)
         }
@@ -26,7 +26,7 @@ class TheaterController extends Controller{
                 throw new Error("فیلمی با این آی دی یافت نشد")
             }
     
-            res.render("categories/screening.ejs", {theater:theater_movie})
+            res.render("adminDashboard/theaterForm.ejs", {theater:theater_movie})
         } catch (err) {
             next(err)
         }

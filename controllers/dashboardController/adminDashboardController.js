@@ -6,7 +6,7 @@ const User = require("../../models/users/userModel")
 class AdminDashboardController extends Controller{
     async dashboard(req,res,next){
         try {
-            res.render("dashboard/adminDashboard.ejs")
+            res.render("adminDashboard/adminDashboard.ejs")
         } catch (err) {
             next(err)
         }
