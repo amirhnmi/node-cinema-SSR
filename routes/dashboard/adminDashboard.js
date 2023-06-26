@@ -10,9 +10,15 @@ const ArtAndExprienceController = require("../../controllers/categoryController/
 const ComedyTheaterController = require("../../controllers/categoryController/comedyTheaterController")
 const ChildrensTheaterController = require("../../controllers/categoryController/childrensTheaterController")
 
-const UploadScreeningImage = require("../../upload/uploadScreeningImage")
+// image validator
 const CategoryImageValidator = require("../../validators/categoryImageValidator")
 
+// image upload
+const ScreeningUploadImage = require("../../upload/screeningUploadImage")
+const TheaterUploadImage = require("../../upload/theaterUploadImage")
+const ComedyTheaterUploadImage = require("../../upload/comedyTheaterUploadImage")
+const ChildrensTheaterUploadImage = require("../../upload/childrensTheaterUploadImage")
+const ArtAndExprienceUploadImage = require("../../upload/artAndExprienceUploadImage ")
 
 router.use((req,res,next)=>{
     if(req.isAuthenticated()){
@@ -22,17 +28,17 @@ router.use((req,res,next)=>{
 })
 router.get("/", AdminDashboardController.dashboard)
 
-// screening
+// screening------------------
 router.get("/screening", ScreeningController.getScreening)
 router.get("/screening/:id", ScreeningController.getOneScreening)
-router.post("/screening/create", UploadScreeningImage.single("image"), (req,res,next)=>{
+router.post("/screening/create", ScreeningUploadImage.single("image"), (req,res,next)=>{
     if(!req.file) {
       req.body.image= null
     }else{
       req.body.image = req.file.filename;
     }
     next();},CategoryImageValidator.validate() ,ScreeningController.createScreening)
-router.put("/screening/update/:id", UploadScreeningImage.single("image"), (req,res,next)=>{
+router.put("/screening/update/:id", ScreeningUploadImage.single("image"), (req,res,next)=>{
     if(!req.file) {
       req.body.image= null
     }else{
@@ -41,32 +47,80 @@ router.put("/screening/update/:id", UploadScreeningImage.single("image"), (req,r
     next();} ,CategoryImageValidator.validate(),ScreeningController.updateScreening)
 router.delete("/screening/delete/:id", ScreeningController.deleteScreening)
 
-// theater
+// theater --------------
 router.get("/theater", TheaterController.getTheater)
 router.get("/theater/:id", TheaterController.getOneTheater)
-router.post("/theater/create" ,TheaterController.createTheater)
-router.put("/theater/update/:id" ,TheaterController.updateTheater)
+router.post("/theater/create" , TheaterUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),TheaterController.createTheater)
+router.put("/theater/update/:id" , TheaterUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),TheaterController.updateTheater)
 router.delete("/theater/delete/:id", TheaterController.deleteTheater)
 
-// artandexprience
+// artandexprience-----------------
 router.get("/artandexprience/", ArtAndExprienceController.getArtAndExprience)
 router.get("/artandexprience/:id", ArtAndExprienceController.getOneArtAndExprience)
-router.post("/artandexprience/create" ,ArtAndExprienceController.createArtAndExprience)
-router.put("/artandexprience/update/:id" ,ArtAndExprienceController.updateArtAndExprience)
+router.post("/artandexprience/create" , ArtAndExprienceUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),ArtAndExprienceController.createArtAndExprience)
+router.put("/artandexprience/update/:id" , ArtAndExprienceUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),ArtAndExprienceController.updateArtAndExprience)
 router.delete("/artandexprience/delete/:id", ArtAndExprienceController.deleteArtAndExprience)
 
-// comedytheater
+// comedytheater-----------------
 router.get("/comedytheater/", ComedyTheaterController.getComedyTheater)
 router.get("/comedytheater/:id", ComedyTheaterController.getOneComedyTheater)
-router.post("/comedytheater/create" ,ComedyTheaterController.createComedyTheater)
-router.put("/comedytheater/update/:id" ,ComedyTheaterController.updateComedyTheater)
+router.post("/comedytheater/create" , ComedyTheaterUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),ComedyTheaterController.createComedyTheater)
+router.put("/comedytheater/update/:id" , ComedyTheaterUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),ComedyTheaterController.updateComedyTheater)
 router.delete("/comedytheater/delete/:id", ComedyTheaterController.deleteComedyTheater)
 
-// childrenstheater
+// childrenstheater---------------
 router.get("/childrenstheater/", ChildrensTheaterController.getChildrensTheater)
 router.get("/childrenstheater/:id", ChildrensTheaterController.getOneChildrensTheater)
-router.post("/childrenstheater/create" ,ChildrensTheaterController.createChildrensTheater)
-router.put("/childrenstheater/update/:id" ,ChildrensTheaterController.updateChildrensTheater)
+router.post("/childrenstheater/create" , ChildrensTheaterUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),ChildrensTheaterController.createChildrensTheater)
+router.put("/childrenstheater/update/:id" , ChildrensTheaterUploadImage.single("image"), (req,res,next)=>{
+    if(!req.file) {
+      req.body.image= null
+    }else{
+      req.body.image = req.file.filename;
+    }
+    next();},CategoryImageValidator.validate(),ChildrensTheaterController.updateChildrensTheater)
 router.delete("/childrenstheater/delete/:id", ChildrensTheaterController.deleteChildrensTheater)
 
 

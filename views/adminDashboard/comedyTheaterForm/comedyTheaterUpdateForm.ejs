@@ -1,0 +1,59 @@
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-3">
+        <form action="/admin/comedytheater/update/<%= comedyTheater.id %>?method=PUT" method="post" enctype="multipart/form-data">
+            <div class="row g-2 was-validated">
+                <div class="col-md-4">
+                    <label  class="form-label">نام فیلم:</label>
+                    <input type="text" name="movie_name" value="<%= comedyTheater.movie_name %>" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">عنوان:</label>
+                    <input type="text" name="title"  value="<%= comedyTheater.title %>" class="form-control is-valid"  required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">بازیگران:</label>
+                    <input type="text" name="actors" value="<%= comedyTheater.actors %>" class="form-control is-valid"  required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">کارگردان:</label>
+                    <input type="text" name="director" value="<%= comedyTheater.director %>" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">تهیه کننده:</label>
+                    <input type="text" name="producer" value="<%= comedyTheater.producer %>" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">تاریخ تولید:</label>
+                    <input type="text" name="production_date" value="<%= comedyTheater.production_date %>" class="form-control is-valid" required >
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">تاریخ اکران:</label>
+                    <input type="text" name="release_date" value="<%= comedyTheater.release_date %>" class="form-control is-valid" required >
+
+                </div>
+                <div class="col-md-4">
+                    <label  class="form-label">توضیحات و خلاصه فیلم:</label>
+                    <textarea name="description" value="<%= comedyTheater.description %>" class="form-control is-invalid"  placeholder="خلاصه ایی از فیلم را ذکر کنید ..." required></textarea>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">عکس پوستر:</label>
+                    <input name="image" type="file" value="<%= comedyTheater.image %>" class="form-control" required >
+                </div>
+
+                <div class="mb-3">
+                    <input class="btn btn-primary ms-2" type="submit" value="آپدیت فیلم" > 
+                    <a href="/admin" class="btn btn-danger">بازگشت به داشبورد</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
