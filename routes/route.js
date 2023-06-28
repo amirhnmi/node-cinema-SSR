@@ -43,6 +43,8 @@ router.get("/",  async (req,res,next)=>{
 // global router
 router.use("/user", require("./users/user"))
 router.use("/auth", require("./authentication/auth"))
+router.use("/auth/forget_password", require("./passwordReset/forgetPassword"))
+router.use("/auth/change_password/", require("./passwordReset/changePassword"))
 router.use("/dashboard", require("./dashboard/userDashboard.js"))
 router.use("/admin", require("./dashboard/adminDashboard"))
 router.use("/categories", require("./categories/categories.js"))

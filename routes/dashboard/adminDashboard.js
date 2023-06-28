@@ -27,7 +27,8 @@ const SalesTableUploadImage = require("../../upload/salesTableUploadImage")
 const NewsUploadImage = require("../../upload/newsUploadImage")
 
 router.use((req,res,next)=>{
-    if(req.isAuthenticated()){
+    if(req.isAuthenticated() && req.user.is_admin === true){
+        console.log(req.user.is_admin)
         return next()
     }
     res.redirect("/")

@@ -27,22 +27,22 @@
                                         </ul>
                                     </div>
                                 <% } %>
-
+                                <% if(message){ %>
+                                    <h6 class="text-success"><%= message %></h6>
+                                <% } %>
                                 <span class="fw-bold ">اگر در سینماتیکت حساب کاربری دارید، وارد شوید.</span>
                                 <form action="/auth/login" class="mt-3" method="post">
                                     <div class="mb-3">
                                         <label htmlFor="exampleInputEmail1" class="form-label">آدرس ایمیل :</label>
                                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" />
                                     </div>
-                                    <% if(message){ %>
-                                        <p class="text-danger"><%= message %></p>
-                                    <% } %>
+                                    
                                     <div class="mb-3">
                                         <label htmlFor="exampleInputPassword1" class="form-lable">کلمه عبور :</label>
                                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" />
                                     </div>
                                     <button type="submit" class="btn btn-danger"><span class="mx-5">ورود</span></button>
-                                    <a href="/password_reset">بازیابی کلمه عبور</a>
+                                    <a href="/auth/forget_password">بازیابی کلمه عبور</a>
                                 </form>
                             </div>
                         </div>
